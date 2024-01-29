@@ -102,14 +102,6 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  if (hasNft) {
-    return {
-      redirect: {
-        destination: "/members",
-        permanent: false,
-      },
-    };
-  }
 
   // Finalmente, retorna as props
   return {
