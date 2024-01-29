@@ -1,25 +1,24 @@
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 import {
-  ConnectWallet, // Componente para conectar a carteira
-  MediaRenderer, // Componente para renderizar mídia (como imagens)
-  useContract, // Hook para acessar um contrato inteligente
-  useContractMetadata, // Hook para acessar metadados de um contrato inteligente
-  useUser, // Hook para acessar informações do usuário
+  MediaRenderer,
+  useContract,
+  useContractMetadata,
+  useUser,
 } from "@thirdweb-dev/react";
 import { ThirdwebSDK } from "@thirdweb-dev/sdk";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { getUser } from "../../auth.config"; // Função para obter informações do usuário autenticado
-import { contractAddress } from "../../const/yourDetails"; // Endereço do contrato inteligente
-import { Header } from "../components/Header"; // Componente de cabeçalho
-import styles from "../styles/Home.module.css"; // Estilos CSS para a página
-import checkBalance from "../util/checkBalance"; // Função para verificar o saldo
+import { getUser } from "../../auth.config";
+import { contractAddress } from "../../const/yourDetails";
+import { Header } from "../components/Header";
+import checkBalance from "../util/checkBalance";
 
-export default function Home() {
+import styles from "../styles/page.module.css";
+
+export default function Members() {
   const { isLoggedIn, isLoading } = useUser(); // Obtém informações sobre o estado de login do usuário
   const router = useRouter(); // Hook para acessar o objeto de roteamento do Next.js
   const { contract } = useContract(contractAddress); // Obtém o contrato inteligente com base no endereço fornecido
-  const { data: contractMetadata, isLoading: contractLoading } =
-    useContractMetadata(contract); // Obtém os metadados do contrato inteligente
+  const { data: contractMetadata, isLoading: contractLoading } = useContractMetadata(contract); // Obtém os metadados do contrato inteligente
 
   useEffect(() => {
     // Redireciona o usuário para a página de login se não estiver logado e não estiver carregando
@@ -30,27 +29,11 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <Header showConnectWalletLink={true} /> {/* Renderiza o componente de cabeçalho */}
-      <h2 className={styles.heading}>Índice </h2> {/* Título da página */}
-      <h1 className={styles.h1}>Autenticação</h1>{" "}
-      {/* Título principal da seção de autenticação */}
-      <p className={styles.explain}>
-        Carteira de TESTE <br />
-        sua coleção, usando{" "}
-        <a
-          className={styles.link}
-          href="https://portal.thirdweb.com/auth"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Autenticação
-        </a>
-        .{" "}
-      </p>
+      <Header showConnectWalletLink={true} />
+      <h1 className={styles.h1}>Seja Bem Vindo</h1>{" "}      
       <div className={styles.card}>
-        <h3>Exclusivo desbloqueado</h3>
-        <p>Carteira de TESTE.</p>
-
+        <h3>Passe Exclusivo desbloqueado</h3>
+       
         {contractMetadata && (
           <div className={styles.nft}>
             <MediaRenderer
@@ -61,14 +44,12 @@ export default function Home() {
             />
             <div className={styles.nftDetails}>
               <h4>{contractMetadata.name}</h4>
-              <p>{contractMetadata.description}</p>
-              <p>{contractMetadata.symbol}</p>
+              <p>Descrição: {contractMetadata.description}</p>
+              <p>Símbolo: {contractMetadata.symbol}</p>
             </div>
           </div>
         )}
         {contractLoading && <p>Carregando...</p>}
-
-        <ConnectWallet theme="dark" className={styles.connect} />
       </div>
     </div>
   );
@@ -124,7 +105,7 @@ export async function getServerSideProps(context) {
   if (hasNft) {
     return {
       redirect: {
-        destination: "/afiliados",
+        destination: "/members",
         permanent: false,
       },
     };

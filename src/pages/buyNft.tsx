@@ -1,7 +1,8 @@
 import { Header } from "../components/Header";
-import styles from "../styles/Home.module.css";
 
-export default function Login() {
+import styles from "../styles/page.module.css";
+
+export default function Buynft() {
   return (
     <div className={styles.container}>
       <Header showConnectWalletLink={false} />

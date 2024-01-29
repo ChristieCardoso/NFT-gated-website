@@ -1,6 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+/* Custom variables */
+:root {
+  --background-color: #271831;
+  --white: #ffffff;
+}
 
-/* Box sizing rules */
 *,
 *::before,
 *::after {
@@ -9,40 +12,19 @@
   margin: 0;
 }
 
-/* Set core body defaults */
 body {
-  min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
-  background-color: #000000; /* Black background */
-  color: #FFFFFF; /* White text */
-  font-family: "Courier New", monospace; /* Monospace font */
+  background-color: var(--background-color);
+  color: #ffffff;
 }
 
-/* Inherit fonts for inputs and buttons */
-input,
-button,
-textarea,
-select {
-  font: inherit;
-}
-
-/* Remove default styles */
-a {
-  text-decoration: none;
-  color: #FF0000; /* Red links */
-}
-
-button {
-  background-color: #FF0000; /* Red background */
-  color: #FFFFFF; /* White text */
-  border: none;
-  padding: 10px 20px;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: bold;
   font-size: 2rem;
 }
@@ -50,12 +32,3 @@ h1, h2, h3, h4, h5, h6 {
 p {
   font-size: 1.5rem;
 }
-
-/* Custom variables */
-:root {
-  --background-color: #000000;
-  --white: #FFFFFF;
-  --tw-color1: #FF0000;
-  --tw-color1-hover: #FF4500;
-}
-
