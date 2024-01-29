@@ -1,56 +1,56 @@
 import {
-  ConnectWallet,
-  MediaRenderer,
-  useContract,
-  useContractMetadata,
-  useUser,
+  ConnectWallet, // Componente para conectar a carteira
+  MediaRenderer, // Componente para renderizar mídia (como imagens)
+  useContract, // Hook para acessar um contrato inteligente
+  useContractMetadata, // Hook para acessar metadados de um contrato inteligente
+  useUser, // Hook para acessar informações do usuário
 } from "@thirdweb-dev/react";
 import { ThirdwebSDK } from "@thirdweb-dev/sdk";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { getUser } from "../../auth.config";
-import { contractAddress } from "../../const/yourDetails";
-import { Header } from "../components/Header";
-import styles from "../styles/Home.module.css";
-import checkBalance from "../util/checkBalance";
+import { getUser } from "../../auth.config"; // Função para obter informações do usuário autenticado
+import { contractAddress } from "../../const/yourDetails"; // Endereço do contrato inteligente
+import { Header } from "../components/Header"; // Componente de cabeçalho
+import styles from "../styles/Home.module.css"; // Estilos CSS para a página
+import checkBalance from "../util/checkBalance"; // Função para verificar o saldo
 
 export default function Home() {
-  const { isLoggedIn, isLoading } = useUser();
-  const router = useRouter();
-  const { contract } = useContract(contractAddress);
+  const { isLoggedIn, isLoading } = useUser(); // Obtém informações sobre o estado de login do usuário
+  const router = useRouter(); // Hook para acessar o objeto de roteamento do Next.js
+  const { contract } = useContract(contractAddress); // Obtém o contrato inteligente com base no endereço fornecido
   const { data: contractMetadata, isLoading: contractLoading } =
-    useContractMetadata(contract);
+    useContractMetadata(contract); // Obtém os metadados do contrato inteligente
 
   useEffect(() => {
+    // Redireciona o usuário para a página de login se não estiver logado e não estiver carregando
     if (!isLoading && !isLoggedIn) {
-      router.push("/afiliados");
+      router.push("/login");
     }
   }, [isLoading, isLoggedIn, router]);
 
   return (
     <div className={styles.container}>
-      <Header />
-      <h2 className={styles.heading}>Index </h2>
-      <h1 className={styles.h1}>Auth</h1>
+      <Header /> {/* Renderiza o componente de cabeçalho */}
+      <h2 className={styles.heading}>Índice </h2> {/* Título da página */}
+      <h1 className={styles.h1}>Autenticação</h1> {/* Título principal da seção de autenticação */}
 
       <p className={styles.explain}>
-        TESTE Wallet <br />
-        your collection, using{" "}
+        Carteira de TESTE <br />
+        sua coleção, usando{" "}
         <a
           className={styles.link}
           href="https://portal.thirdweb.com/auth"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Auth
+          Autenticação
         </a>
         .{" "}
       </p>
 
       <div className={styles.card}>
-        <h3>Exclusive unlocked</h3>
-        <p>TESTE Wallet.</p>
+        <h3>Exclusivo desbloqueado</h3>
+        <p>Carteira de TESTE.</p>
 
         {contractMetadata && (
           <div className={styles.nft}>
@@ -63,10 +63,11 @@ export default function Home() {
             <div className={styles.nftDetails}>
               <h4>{contractMetadata.name}</h4>
               <p>{contractMetadata.description}</p>
+              <p>{contractMetadata.symbol}</p>
             </div>
           </div>
         )}
-        {contractLoading && <p>Loading...</p>}
+        {contractLoading && <p>Carregando...</p>}
 
         <ConnectWallet theme="dark" className={styles.connect} />
       </div>
@@ -74,9 +75,9 @@ export default function Home() {
   );
 }
 
-// This gets called on every request
+// Esta função é chamada em cada requisição do lado do servidor
 export async function getServerSideProps(context) {
-  const user = await getUser(context.req);
+  const user = await getUser(context.req); // Obtém informações do usuário com base no contexto da requisição
 
   if (!user) {
     return {
@@ -87,30 +88,30 @@ export async function getServerSideProps(context) {
     };
   }
 
-  const secretKey = process.env.TW_SECRET_KEY;
+  const secretKey = process.env.TW_SECRET_KEY; // Obtém a chave secreta do ambiente
 
   if (!secretKey) {
-    console.log("Missing env var: TW_SECRET_KEY");
-    throw new Error("Missing env var: TW_SECRET_KEY");
+    console.log("Variável de ambiente ausente: TW_SECRET_KEY");
+    throw new Error("Variável de ambiente ausente: TW_SECRET_KEY");
   }
 
-  // Ensure we are able to generate an auth token using our private key instantiated SDK
+  // Garante que podemos gerar um token de autenticação usando nossa chave privada SDK instanciada
   const PRIVATE_KEY = process.env.THIRDWEB_AUTH_PRIVATE_KEY;
   if (!PRIVATE_KEY) {
-    throw new Error("You need to add an PRIVATE_KEY environment variable.");
+    throw new Error("Você precisa adicionar uma variável de ambiente PRIVATE_KEY.");
   }
 
-  // Instantiate our SDK
+  // Instancia nosso SDK
   const sdk = ThirdwebSDK.fromPrivateKey(
     process.env.THIRDWEB_AUTH_PRIVATE_KEY,
     "mumbai",
     { secretKey }
   );
 
-  // Check to see if the user has an NFT
+  // Verifica se o usuário possui um NFT
   const hasNft = await checkBalance(sdk, user.address);
 
-  // If they don't have an NFT, redirect them to the login page
+  // Se eles tiverem um NFT, redireciona-os para a página index
   if (!hasNft) {
     return {
       redirect: {
@@ -120,7 +121,7 @@ export async function getServerSideProps(context) {
     };
   }
 
-  // Finally, return the props
+  // Finalmente, retorna as props
   return {
     props: {},
   };

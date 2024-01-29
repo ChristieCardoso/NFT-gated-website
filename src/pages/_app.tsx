@@ -11,6 +11,7 @@ function MyApp({ Component, pageProps }) {
     <ThirdwebProvider
       activeChain={activeChain}
       clientId={process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID}
+      autoSwitch
       authConfig={{
         domain: domainName,
         authUrl: "/api/auth",

@@ -1,8 +1,8 @@
 // Replace this with your contract address
-export const contractAddress = "0xCB3C31D3a2bbeb47A1168E8209B12dA2eB8C5f35";
+export const contractAddress = "0x5B7537a8266f8Eb7E7F784c80f61993220692bE9";
 
 // Replace this with your domain name.
-export const domainName = "teste.com";
+export const domainName = "localhost:3000";
 
 // Minimum number of tokens required to access
 export const minimumBalance = 1;
