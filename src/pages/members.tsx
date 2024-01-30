@@ -93,7 +93,6 @@ export async function getServerSideProps(context) {
   // Verifica se o usuário possui um NFT
   const hasNft = await checkBalance(sdk, user.address);
 
-  // Se eles tiverem um NFT, redireciona-os para a página index
   if (hasNft) {
     return {
       redirect: {
@@ -103,7 +102,6 @@ export async function getServerSideProps(context) {
     };
   }
 
-  // Finalmente, retorna as props
   return {
     props: {},
   };
