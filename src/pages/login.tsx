@@ -14,28 +14,33 @@ export default function Login() {
   const { data: contractMetadata, isLoading: contractLoading } = useContractMetadata(contract);
 
   return (
-    <div className={styles.container}>
+    <div>
       <Header showConnectWalletLink={true} />
-      <div className={styles.card}>
-        {contractMetadata && (
-          <div className={styles.nft}>
-            <MediaRenderer
-              src={contractMetadata.image}
-              alt={contractMetadata.name}
-              width="100px"
-              height="100px"
-            />
-            <div className={styles.nftDetails}>
-              <h4>{contractMetadata.name}</h4>
-              {contractMetadata.description && (
-                <p>{contractMetadata.description.substring(0, 100)}...</p>
-              )}
+      <div className={styles.container}>
+        <h1 className={styles.h1}>Faça seu login</h1>
+        <div className={styles.card}>
+          {contractMetadata && (
+            <div className={styles.nft}>
+              <MediaRenderer
+                src={contractMetadata.image}
+                alt={contractMetadata.name}
+                width="100px"
+                height="100px"
+              />
+              <div className={styles.nftDetails}>
+                <h4>{contractMetadata.name}</h4>
+                {contractMetadata.description && (
+                  <p>{contractMetadata.description.substring(0, 100)}...</p>
+                )}
+                <p>Símbolo: {contractMetadata.symbol}</p>
+              </div>
             </div>
+          )}
+          {contractLoading && <p>Loading...</p>}
+          <div className={styles.connect}>
+            <ConnectWallet theme="dark" />
           </div>
-        )}
-        {contractLoading && <p>Loading...</p>}
-
-        <ConnectWallet theme="dark" className={styles.connect} />
+        </div>
       </div>
     </div>
   );

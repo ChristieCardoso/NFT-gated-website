@@ -1,7 +1,8 @@
 /* Custom variables */
 :root {
-  --background-color: #271831;
-  --white: #ffffff;
+  --background-color: #000;
+  --background-color-header: #271831;
+  --color-white: #ffffff;
 }
 
 *,
@@ -16,7 +17,7 @@ body {
   text-rendering: optimizeSpeed;
   line-height: 1.5;
   background-color: var(--background-color);
-  color: #ffffff;
+  color: var(--color-white);
 }
 
 h1,

@@ -18,7 +18,8 @@ export default function Members() {
   const { isLoggedIn, isLoading } = useUser(); // Obtém informações sobre o estado de login do usuário
   const router = useRouter(); // Hook para acessar o objeto de roteamento do Next.js
   const { contract } = useContract(contractAddress); // Obtém o contrato inteligente com base no endereço fornecido
-  const { data: contractMetadata, isLoading: contractLoading } = useContractMetadata(contract); // Obtém os metadados do contrato inteligente
+  const { data: contractMetadata, isLoading: contractLoading } =
+    useContractMetadata(contract); // Obtém os metadados do contrato inteligente
 
   useEffect(() => {
     // Redireciona o usuário para a página de login se não estiver logado e não estiver carregando
@@ -28,28 +29,30 @@ export default function Members() {
   }, [isLoading, isLoggedIn, router]);
 
   return (
-    <div className={styles.container}>
+    <div>
       <Header showConnectWalletLink={true} />
-      <h1 className={styles.h1}>Seja Bem Vindo</h1>{" "}      
-      <div className={styles.card}>
-        <h3>Passe Exclusivo desbloqueado</h3>
-       
-        {contractMetadata && (
-          <div className={styles.nft}>
-            <MediaRenderer
-              src={contractMetadata.image}
-              alt={contractMetadata.name}
-              width="70px"
-              height="70px"
-            />
-            <div className={styles.nftDetails}>
-              <h4>{contractMetadata.name}</h4>
-              <p>Descrição: {contractMetadata.description}</p>
-              <p>Símbolo: {contractMetadata.symbol}</p>
+      <div className={styles.container}>
+        <h1 className={styles.h1}>Seja Bem Vindo</h1>{" "}
+        <div className={styles.card}>
+          <h3>Passe Exclusivo desbloqueado</h3>
+
+          {contractMetadata && (
+            <div className={styles.nft}>
+              <MediaRenderer
+                src={contractMetadata.image}
+                alt={contractMetadata.name}
+                width="70px"
+                height="70px"
+              />
+              <div className={styles.nftDetails}>
+                <h4>{contractMetadata.name}</h4>
+                <p>Descrição: {contractMetadata.description}</p>
+                <p>Símbolo: {contractMetadata.symbol}</p>
+              </div>
             </div>
-          </div>
-        )}
-        {contractLoading && <p>Carregando...</p>}
+          )}
+          {contractLoading && <p>Carregando...</p>}
+        </div>
       </div>
     </div>
   );
