@@ -25,7 +25,7 @@
   .link {
     text-decoration: none;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     color: var(--color-white);
     font-size: 20px;
   }
