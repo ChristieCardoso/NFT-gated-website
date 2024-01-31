@@ -12,6 +12,19 @@
   color: #fff;
 }
 
+.description {
+  margin-top: 2rem;
+  font-size: 1.2em;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  width: 80%;
+}
+
+.reference {
+  font-size: 1.2em;
+  width: 85%;
+}
+
 .iframe {
   margin-top: 40px;
 }

@@ -1,5 +1,5 @@
 // Replace this with your contract address
-export const contractAddress = "0xCB3C31D3a2bbeb47A1168E8209B12dA2eB8C5f35";
+export const contractAddress = "0x18F5603075FeEfdAdFDd8c0398DB4E3a25975D0A";
 
 // Replace this with your domain name.
 export const domainName = "nft-website-gated.vercel.app";

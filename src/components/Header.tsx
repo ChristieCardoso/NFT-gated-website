@@ -13,7 +13,7 @@ export const Header = ({ showConnectWalletLink }) => {
     <nav className={styles.header}>
       <Link href="/">
         <img
-          src="https://res.cloudinary.com/dmvm1mlgv/image/upload/f_auto,q_auto/yhfzhawy4hlzaqjhy5lk"
+          src="https://res.cloudinary.com/dmvm1mlgv/image/upload/f_auto,q_auto/xeh85vuil3bxqtiu8o36"
           alt="Logo Pass"
           className={styles.logo}
         />
