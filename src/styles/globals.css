@@ -3,6 +3,8 @@
   --background-color: #000;
   --background-color-header: #271831;
   --color-white: #ffffff;
+  --color-gray: #545454;
+  --color-black: #0c0c0c;
 }
 
 *,
@@ -28,6 +30,15 @@ h5,
 h6 {
   font-weight: bold;
   font-size: 2rem;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-white);
+}
+
+a:hover {
+  color: var(--color-gray);
 }
 
 p {
